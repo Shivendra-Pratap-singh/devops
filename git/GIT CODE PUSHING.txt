@@ -1,0 +1,12 @@
+TO push code from praveen repo to sujata repo without authors name
+step1:go to cmd create one directory prveen and another dir sujata
+step2:clone the code from praveen repo in directory praveen
+step3:create a new repository in sujata github account
+step4:create a new branch in sujata repo
+step5:clone the code from a repo {new branch repo}---git clone -b <branchname> <sujata repo-url>
+step6:copy only the required files(except .git folder) from praveen directory to sujata dir.
+step7:go to vs code editor-->file-->open folder-->sujata dir
+step8:in vs code editor left pane-->source control-->add staged changes(+) 
+step9:add commit message-->commit-->synch changes
+step10:popup comes click ok for git push and pull
+step11:check your github account code will pushed and raise pullrequest-->merge pull request-->confirm

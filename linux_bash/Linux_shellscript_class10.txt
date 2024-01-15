@@ -1,0 +1,136 @@
+variables:
+----------
+Variables are memory location which can store some values.
+
+syntax: <variable_name>=<variable_value>
+        eg: MYNAME=bharath
+  
+
+
+How to print / check / substitute / call values of a variable?
+--------------------------------------------------------------
+
+$ (dollar) is mandatory while substituting varaible ==> $<variable_name>
+
+echo $<variable_name>
+
+
+eg: PLAYER=viratKohli
+    echo " my favorite sportsmen is $PLAYER "
+
+there are two types of variables in linux:
+------------------------------------------
+1. system / predefined variable:
+    varaiables that are already created on its own while launching ec2 instance
+    env ==> command is used to check system defined varaibles 
+	
+2. user defined variable:
+    variables created by user (ec2-user / any other user)
+
+
+Rules while creating variables:
+-------------------------------
+1. recommended to use uppercase letters while creating variables
+	 myname=bharath ==> MYNAME=bharath
+	 
+2. no space between variable name & variable_value
+      MYNAME=bharath
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Linux Operating system has 2 main components
+
+1. shell : 
+   -------
+   Shell is terminal / Screen
+   Shell acts as interface between user & kernel
+   Shell is responsible to read commands/applications provided by user.
+		  
+2. Kernel :
+   --------
+   Kernel is responsible to execute that command with the help of hardware components
+
+shell+kernel is nothing but operating system
+
+
+what is shell responsiblity ?
+-------------------------------
+it will take inputs from user (ec2-user / any user) then it will forward the request is forwarded to kernel, kernel inturn talks to hardware & completes user request
+
+
+
+what is shell script?
+---------------------
+A sequence of commands saved to a file and this file is nothing but shell script.
+
+.sh   --> extension of shell script
+ex: 
+.txt  --> extension of simple text files
+.java --> extension of java files
+.py   --> extension of python files
+
+
+
+-----------------------------------------------------------------------------
+
+
+
+
+
+Steps involved in creating a shell script:
+==========================================
+1. name your file / script with .sh extension
+   vi myscript.sh
+2. first line of shell script is called as shebang
+   #!/bin/bash
+   shebang: invoke the shell
+3. add contents / commands which we need shell to perform
+4. run/execute shell script 
+   two ways to run/execute scripts
+     i. sh <scriptname>.sh
+	 ii. ./<scriptname>.sh
+
+
+
+-----------------------------------------------------------------------------
+
+write a script which will print date?
+--------------------------------------
+1. vi date_script.sh
+2. add #!/bin/bash ==> shebang line
+3. date (save & quit)
+4. sh date_script.sh
+
+
+write a script which will print disk usage?
+--------------------------------------------
+1. vi disk_usage_script.sh
+2. add #!/bin/bash ==> shebang line
+3. df -kh
+4. sh disk_usage_script.sh
+
+
+
+-----------------------------------------------------------------------------
+
+
+
+why do we need shell scripts?
+=============================
+1. Automate your regular tasks.
+   ex: like disk hdd usage check, ram usage check , cpu usage check
+
+2. taking backups
+   (backup: keep another copy of your file/dir)
+
+3. portable
+
+
+
+
+-----------------------------------------------------------------------------
+
+Assignment:
+-------------
+write a shell script to add 2 numbers
