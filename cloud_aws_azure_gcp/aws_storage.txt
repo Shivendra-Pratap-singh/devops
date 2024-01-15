@@ -1,0 +1,179 @@
+What is an EIP?
+-An Elastic IP address is a reserved static public IP address that you can assign to any EC2 instance.
+
+##If additinal volume is not showing 
+mkfs -t ext4 /dev/xvdb
+mount /dev/xvdb /mnt
+
+
+Types of Storage:
+1.Direct-attached storage (DAS)
+2.Network attached storage (NAS)
+3.Storage area network (SAN)
+4.Cloud Storage i.e. storage over Internet
+
+1.Direct attached storage (DAS):
+- Direct-attached storage (DAS) is attached directly to the computer system motherboard connectors or through usb. Examples of DAS include hard drives, CDROM/DVD ,
+external hard drives, optical disc drives, pendrive etc.
+- Amazon provide these facility through EBS (Elastic Block Storage service)
+
+ 2.Network-attached storage (NAS):
+- NAS uses file-based protocols for sharing folders using NFS for Linux/UNIX.
+- It is a shared folder over the network.
+- Amazon provide these facility through EFS ( Elastic File system ) service.
+- A shared folder cannot be formatted.
+
+3. Storage Area Network (SAN):
+- A storage-area network (SAN) is a dedicated high-speed network block level data storage, It can be formatted.
+- Fiber cable, bus adapters (HBAs) and fiber switches are used to provide SAN storage.
+
+4.Cloud storage:
+- Cloud storage is a storage over internet provided by cloud service venders.
+- It is not a block level storage i.e. cannot be formatted.
+Eg.
+Google drive
+One drive
+Dropbox
+Amazon provides this services through
+ 1.S3 (Simple storage service )
+ 2.Glacier service
+
+
+EBS main componets:
+Volumes
+Snapshot
+Images
+
+Types of Volumes:
+1.EBS General Purpose (SSD=solid-state drive):
+- General Purpose SSD (gp2 and gp3) volumes offer cost-effective storage.
+- This volume type is suitable for small and medium workloads like Root disk EC2 volumes, small and medium database workloads, frequently logs accessing workloads, etc.
+-By default, SSD supports 3 IOPS (Input Output Operations perSecond)/GB means 1 GB volume will give 3 IOPS, and 10 GB volume will give 30 IOPS. 
+
+2.Provisioned IOPS (SSD):
+- Provisioned IOPS SSD (io1 and io2) volumes provide low latency and are designed to meet the needs of I/O-intensive workloads. 
+- They are best for EBS-optimized instances.
+- This volume type is suitable for the most demanding I/O intensive, transactional workloads and large relational, EMR and Hadoop workloads, etc. 
+- By default, IOPS SSD supports 30 IOPS/GB means 10GB volume will give 300 IOPS.
+
+3.Throughput Optimized HDD(Hybrid Hard Drive):
+- Throughput Optimized HDD (st1) volumes provide low-cost magnetic storage that is a good fit for large, sequential workloads.
+
+4.Cold HDD:
+- Cold HDD (sc1) volumes provide low-cost magnetic storage that offers lower throughput than st1.
+- sc1 is a good fit for large, sequential cold-data workloads that require infrequent access to data.
+
+5.EBS Magnetic Volumes:
+- Magnetic (standard) volumes are best suited for workloads where data is accessed infrequently
+- It was formerly known as standard volumes. This volume type is suitable for ideal workloads like infrequently accessing data, i.e. data backups for recovery, logs storage, etc. 
+- Its storage capacity of one volume ranges from 10GB to 1TB. 
+- The cost of one volume is $0.05 per GB for one month for provisioned storage and SO. 05 per million |/O requests.
+
+
+
+Amazon Elastic Block Store : EBS
+- Provides block level storage volumes for use with Amazon EC2 instances
+a. Multiple volumes can be mounted to the same instance.
+b. EBS volumes are network-attached, and independently from the life of an instance. 
+c. Storage volumes behave like raw, unformatted block devices, allowing users to create a file system on top of Amazon EBS volumes,
+   or use them in any other way you would use a block device (like a hard drive).
+d. EBS volumes at one particular time can be attached to only one instance, it cannot be used with two or more instance at the same time.
+e. Each EBS volume will have a volume id, which will be used by cloudwatch and other services,   
+f. EBS volumes are placed in a specific Availability Zone, and can then be attached to instances also in that same Availability Zone.
+g. Each storage volume is automatically replicated within the same Availability Zone. 
+h. EBS provides the ability to create point-in-time snapshots of volumes, All snapshots are stored in s3 service of aws. 
+  
+
+
+What is difference  between Instance Store Volume(Root Volume) and an EBS Volume?:
+- An Instance Store Volume is temporary storage that is used to store the temporary data required by an instance to function. 
+- The data is available as long as the instance is running. As soon as the instance is turned off, the Instance Store Volume gets removed and the data gets deleted
+- On the other hand, an EBS Volume represents a persistent storage disk. 
+- The data stored in an EBS Volume will be available even after the instance is turned off.
+
+Images(AMI):
+- An Amazon Machine Image (AMI) is a supported and maintained image provided by AWS
+- Its like template to lunch ec2 instances(required packages)
+- You must specify an AMI when you launch an instance
+- You can launch multiple instances from a single AMI when you require multiple instances with the same configuration.
+- You can use different AMIs to launch instances when you require instances with different configurations
+
+EBS Snapshot:
+- Snapshot are used to take EBS point-in-time backup.
+- Snapshot are incremental back up of the EBS volume.
+- Snapshots are region specific, where as volumes are specific to availability zones.
+
+To increase the size of EBS Volumes first create the snapshots, then from this snapshot create the required size of volume
+- Volume size cannot be decrease lesser than the snapshot size
+- Volumes in another Availability zones can be created using snapshot
+- To have the same volume in another region, first copy the snapshot in other region, then from this snapshot create the volume in required availability zones.
+- Volumes are not deleted if snapshots are removed, similarly snapshots are not deleted if volumes are removed
+
+
+S3 Bucket:
+-Amazon Simple Storage Service (Amazon S3) is an object storage service
+ S3 Features:
+ - scalability
+ - availability
+ - security
+ - performance
+
+There are different storage options for cost optimization:
+1.Standard — General Purpose:
+- This is the default storage and is used frequently.(with milliseconds access)
+Eg: Big Data Analytics, mobile and gaming app, content distributions.
+
+2.Standard — IA (Infrequent Access):
+- This type of storage should be used when you are not using the data that often. When you use them, you need them rapidly.
+- Cost is optimized from the general plan.
+Eg: Datastore for the disaster recovery backups.
+ 
+3.One Zone IA (Infrequent Access):
+- Recreatable, infrequently accessed data (once a month) stored in a single Availability Zone with milliseconds access
+- This one is cheaper than the previous S3 IA storage (< 20%).
+
+4.Intelligent-Tiering:
+- Data with changing or unknown access patterns
+- If you do not know what to choose between General and IA plan storage, this one is for you.
+- The less-used file will be moved to IA mode and others used in Standard storage mode.
+
+5. Glacier Instant Retrieval:
+- Long-lived archive data accessed once a quarter with instant retrieval in millisecond
+
+6. Glacier Flexible Retrieval (formerly Glacier): 
+- Long-lived archive data accessed once a year with retrieval of minutes to hours
+
+7. Glacier Deep Archive:
+- Long-lived archive data accessed less than once a year with retrieval of hours
+- This storage is used when some data needs to be frozen for a certain period of time.
+- Data can be retrieved quickly as listed in the fees plans below.
+- They are cheap in price. Amazon Glacier Deep Archive is the cheapest
+
+8. Reduced redundancy:
+- Noncritical, frequently accessed data with milliseconds access (not recommended as S3 Standard is more cost effective)
+
+
+
+Bucket naming rules:
+- Bucket names must be between 3 (min) and 63 (max) characters long.
+- Bucket names can consist only of lowercase letters, numbers, dots (.), and hyphens (-).
+- Bucket names must begin and end with a letter or number.
+- Bucket names must not contain two adjacent periods.
+- Bucket names must not be formatted as an IP address (for example, 192.168.5.4).
+- Bucket names must not start with the prefix xn--.
+- Bucket names must not end with the suffix -s3alias. This suffix is reserved for access point alias names.
+- Bucket names must be unique across all AWS accounts in all the AWS Regions within a partition. A partition is a grouping of Regions. AWS currently has three partitions: 
+   aws (Standard Regions), aws-cn (China Regions), and aws-us-gov (AWS GovCloud (US)).
+- A bucket name cannot be used by another AWS account in the same partition until the bucket is deleted.
+- Buckets used with Amazon S3 Transfer Acceleration can't have dots (.) in their names. For more information about Transfer 
+
+
+
+EFS: Amazon Elastic File System
+- Amazon EFS provides scalable file storage for use with Amazon EC2.
+- You can use an EFS file system as a common data source for workloads and applications running on multiple instances
+
+
+
+
+

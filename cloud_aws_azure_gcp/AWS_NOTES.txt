@@ -1,0 +1,518 @@
+Intex
+1. AWS Budget
+2. AWS IAM
+
+Multiple Platform to Host Application ---> Senior architect work
+1. EC2
+2..Elastic Beanstalk
+ECS - Container
+Lightsail  
+
+Storage
+1. S3
+2. EBS Volumes
+3. EFS  Volumes
+
+Why aws...?
+According to 2021 Gartner magic quadrant aws 1st, microsoft 2nd, GCP, third
+
+diffrent vendors: Azure, GCP, Alibaba , IBM, Tencent, Oracle .... VMWare
+
+Customer Conerns :
+law, 
+Regulatory complaince
+Licensing, (oracle )
+Confidantial Data , Data Security, 
+Trust and Security 
+Hacking a data, 
+Server Access ==> Underlying Hardwere ,Database RDS,( EC2, MySQL)
+
+Lack Knowledge of Resource, Understadning of Cloud 
+Migration time , Downtime during migration
+
+On Premises, Traditional Data Center
+Data Center = Server ( RAM, HDD/SSD, NIC(Network Interface Card), OS, Application, Software), 
+		Storage(SAN, NAS, DISK, Tape), 
+		Netwoorking (Switches, Router), 
+		Security(Firewall, Security Guard), 
+		UPS (Power Backup), AC
+
+AWS Global Infrastructure
+- Regions ==> Geographical Area or Phycial location Like Bangalore, Hubli, bagalkot (Place) two ore moew (AZ)
+- Avilablity Zones (AZ) ==> Group of one or more Data Center ==> aws (fortinet) copy same data or store in different AZ
+- Edge Location ===> CDN (Content delivery network) ex: NetFlix : Catched movie from US data center to bangalore Reduce latency
+- AWS Local zone
+- AWS Wavelength
+
+Cloud Computing Models:
+-IAAS = Infrastructure as a service ==>ex. EC2
+-PASS = Platform as a service ==>ex. Elastic beanstack, ECS
+-SAAS = Software as a service ==>ex. SNS
+
+Cloud Deployment Models:
+Public Cloud aws, azure
+Private Cloud
+Hybrid Cloud
+
+Creting AWS Account
+EC2 750 Hours Free t2.micro, t3.micro
+S3 5GB
+
+================================================
+IAM ===> Identity and access management
+Day 6
+Security Multi Factor Authntication : MFA
+
+Very Important
+IAM ===> Identity and access management
+Regional/Global Service ==> IAM is global service
+Industry Practice (Least Privilage) ===> Dont give all acces to every user
+
+IAM User==> Programatic Access --> Access key and Secrete key
+	          Console Access ---> Password
+
+Distrubustion List (DL) - Same mail id to create AWS and (Have acces to 3 People)
+
+Adding Policies to users
+
+Day 7
+IAM Group
+1. Create Userd --> Assign Polices
+2. Create groups --> Add user --> Assign Polices
+3. Create Polices --->Add to user
+
+Project-Manager: Krishna
+Developers: Bhishma, Drona, Dhritarashtra, Pandu
+Testers: Arjuna, , Bhima, Nakula, Sahadeva, Yudhishthira, Duryodhana, Dushasana, Karna, Ashwatthama
+DevOps-Team: Draupadi, Kunti, Gandhari
+
+IAM Policies
+1. AWS Managed
+2. Customer Managed
+
+Day 9
+Service Quotas
+Identity Provider
+
+Service Quota Check
+================================================
+AWS Cloud Storage Service
+
+1. AWS S3
+2. AWS Glacier
+3. AWS Elastic Block Storage (EBS)
+4. Amazon EFS 
+5. Storage Gateway
+6. AWS Snow Family
+
+On Premises
+object Storage 
+Disk/Block Storage
+Network Storage
+
+Storage Service
+How do you store data..?
+How are the data access..?
+Use Cases..?
+
+Cloud
+S3 ==> object Storage ==> Image, Video, Application logs
+EBS ==> Disk/Block Storage ==> For ec2 machine (HardDisk), Install OS ==> Attach EFS to Single EC2
+EFS ==> Network Storage(File Storage)==> SMB Network Store(ISM Institute)==> Attach EFS to multiple EC2
+
+AWS S3
+Object Storage
+Global, But Region Specific
+Butket names are global unique
+to create buket: bucket name, region
+by default access private
+
+Why S3..?
+
+Highly durable ==> data loss and AS per AWS SLA(99.9)
+Highly avilable ==> For access( No outage)
+Highly scalable ==> No Limit to upload file size ( It auto takes(increse) storage based on my files )
+
+- Single file can be 0bytes to 5TB Upload
+- 100Mb muti part upload ( USE CLI )
+  Commanad: aws s3 cp <file-name> s3://<bucket-name>/
+
+Key is important in file S3
+https://<bucketname>.s3.<region>.amazonaws/<key>
+
+Identity Based policies
+	IAM Plicies
+
+Resource (S3) based Policies
+	Bucket Policies
+	ACL ( Access Control List)
+	
+one aws to another aws [ Cross accont access] IAM Role
+
+=======Bucket Versioning=====
+Keep multiple copies of the same object
+to avoid accidental deletions, overwrite
+by default S3 versioning is disabled , and you have to enable it
+Once bucket versioning is enabled, you cannot disable it, but you can suspend it
+when bucket versioning enabled, object deleted will have "delete marker"
+when you delete delete marker? Prevouis version of object gets promoted as current
+Delete an object in version enabled bucket ==> you have to delete all versions of the objects
+
+
+==========Storage Class==========
+Standard
+Intelligent-Tiering
+Standard-IA
+One Zone-IA
+Glacier Instant Retrieval
+Glacier Flexible Retrieval (formerly Glacier)
+Glacier Deep Archive
+
+SLP==> Storage Lifecycle Policies
+management ---> Lifecycle rules
+
+Avalibility - varies depending on storage class
+Durability- multiple copies your object in same AZ or morethen one AZ
+
+11 9s durability(9.9999999999)
+99.9 - 99.999 varies on storage class
+
+Static Website Host:
+S3
+Route53
+Type
+A
+NS
+SOA ==> Start of authority
+
+Cloud Front
+Why cloud front...?
+Low latency
+Uses edge locations
+
+http: PORT 80
+https: PORT 443 
+Certificate manager
+Command
+nslookup vtucalculator.in
+ping vtucalculator.in
+
+Linux
+dig vtucalculator.in
+
+
+
+Replication Rules ==> Copy and save safe data in other zone also
+Change storage class avilable
+Same Region Replication = SRR
+Cross Region Replication = CRR
+Cross Account Replication = CAR
+Version should be enabled, Both bucket
+
+Encription
+Whta we need for Encription
+1) Objects
+2) Encryption Keys
+at REST -
+in Transit
+Data is at rest
+client at his side
+after uploading into bucket (Server side)
+Uploading the data to S3 bucket
+SSE-C - Server side Encryption - Customer managed Keys
+SSE- S3 - Server side Encryption - S3 managed  Keys
+"SSE- KMS - Server side Encryption - KMS, Customer managed keys , S3"
+
+=================================================
+Elastic Compute Cloud EC2 (Azure: VM, GCP: Compute)
+
+EC2= Virtual machine running on aws cloud resizable computeing
+
+EC2 Host
+	shared ==> shared between different customer, cheap
+	dedicated ==> dedicated to single customer
+EC2 Instance
+	Key Pair (Public/private key)
+	security groups to allow connection (PORT 22 Linux, PORT 3389 Windows)
+
+
+Free- tier
+  750 hours per month of Linux, RHEL, or SLES t2.micro or t3.micro instance dependent on region
+  running hours = EC2 instance is ON
+
+how to connect to EC2 instance ?
+
+user name : ec2-user (linux)
+
+Linux (ssh port 22 )
+
+gitbash
+mobaXterm ,  
+putty
+
+Systems Manager (session manager)
+
+EC2 Instance Connect
+EC2 Serial Console
+
+Windows (rdp port 3389)
+
+For ping we need to add ICMP in security group
+
+
+WINDOWS SERVER
+DOWNLOAD RDP AND PASSWORD
+CTRL + RUN TYPE mstsc(Microsoft Terminal Services Client)
+Remote Desktop Protocol (RDP)
+
+.\Administrator
+Password
+n1(!Sz%XEc3j;cv6-ywVZajugevzBrdH
+
+================================\
+Security Group
+
+Virtual Firewall,
+Security Group == First level of defense 
+NACL (network Access Control List) -- 2nd level level Defense 
+
+Inbound Rules <=== VPC/outside to EC2 
+Outbound Rules ===> From EC2 to VPC/Outside
+
+stateful <=== if you allow inbound on port 22 , then outbound is automatically allowed
+any changes to Security group are immediately applied
+you can attach more than one Security Group to EC2 Instance 
+SG have only Allow Rule
+
+
+Instance Type
+t2.micro = Free-tier eligible
+Instance type
+	vCPUs
+	Memory (GiB)
+	Storage type
+	Network performance
+
+1. General Purpose  == CPU , RAM , networking , equaly balanced , 
+2. Compute Optimized === CPU
+3. Memory Optimized ( RAM) === RAM , Database application 
+4. Accelarated Computing === 
+5. Storage Optimized === storage
+
+
+m4.4xlarge 
+m = Instance Family , 
+4 = Genaration 
+4xlarge =  Size 
+
+
+To change Instance Type
+
+1. stop the instance ( min downtime )
+2. Change your instance type ( t.micro ==> t2.small/t2.medium)
+3. start the instance 
+
+Change termination protection ==> Enable termination protection to prevent your instance from being accidentally terminated.
+Change stop protection == > preventing accidental stop 
+
+
+===========================
+VOLUME ATTACH PROCEDURE
+commands to create fs and mount the EBS vol
+1. Create Volume
+2. Attach That valume to Instance
+3. Go to terminal
+Commands==>
+df -h ===> Details
+lsblk -f  ===> list block file system
+4. Mount valume
+sudo mkfs -t xfs /dev/xvdf ===> make file system "xfs" formate like fat32, NTFS
+sudo mkdir /datadisk
+
+
+To mount an attached volume automatically after reboot
+sudo cp /etc/fstab /etc/fstab.orig
+lsblk -f
+vi /etc/fstab
+add required entry
+	ex: UUID=d03f84fd-3295-47a9-abf6-046653b6e0f5     /datadisk   xfs    defaults,nofail   0   2
+close vi editor
+
+to verify
+sudo umount /datadisk
+sudo mount -a 
+==============================================
+System Manager
+Configuration management
+ssm-agent
+direct access
+
+================================================
+
+Cloud Watch
+
+
+
+================================================
+Cloud trail
+Default will store logs upto 90days
+All cloud trail logs stored in S3
+
+
+================================================
+Trust advicer
+
+Alert Criteria
+
+Green: Access to port 80, 25, 443, or 465 is unrestricted.
+Dont open these ports
+Red: Access to port 20, 21, 22 (SSH) ,1433, 1434, 3306, 3389, 4333, 5432, or 5500 is unrestricted.
+Yellow: Access to any other port is unrestricted.
+
+0 ===> 65535
+
+================================================
+RDS
+
+MySQL
+MariaDB Oracle
+Micorsoft SQL
+Postgres
+Amazon Aurora
+you cannot ssh into your RDS Instance
+as DB admin, i need access to server/instance <=== dont go RDS create EC2, (mysql)
+
+Read Replica
+we have will create standby instance, it is used for only READ Operation
+performance of my primary db, increase
+
+Multi-AZ ===> AWS will create standby instance, and perform synchronous Replication venkatesh-demo-rds <==> venkatesh-demo-rds-xyz
+us-east-1a <==> us-east-1b, us-east-1c
+
+If primary dtabase down the secondary DB will get into action (MULTI-AZ)
+standby instance will automatically get promoted as main DB
+
+If i stop RDS it will automatically strat after 7 days becoz of security patch update
+
+Snapshot 0-35 Days
+================================================
+
+Serverless Services
+0r Dunction as a service (FaaS)
+Lambda
+API Gateway
+Dynamo DB
+AWS SNS
+
+
+Lamda
+Virtual Functions (no need to manage server)
+Billing: 128MB - 10GB RAM(Increments of 1), Execution time
+On-demand(We set trigger)
+Auto scalling
+
+Short time excution
+15 Min
+
+Language: Python, Javascript, Java, .Net, Go
+
+No need to Run 24 Hr instance,
+
+Amazon EventBridge
+
+================================================
+
+AWS Virtual Private Cloud (VPC)
+VPC is isoleted netword
+Per Regioon 5 VPC MAx
+
+Googel.com ==> IP Address ==> DNS ==> Binary 0, 1
+
+Subnet
+	Public Subnet = Internet connectiviy
+	private Subnet = no Internet connectiviy
+
+IGW (Internet Gateway) = 1IGW =1VPC
+Route Table = Route your traffic
+Nat Gateway = Internet to private subnet
+
+CIDR(Classless Inter Domain Routing)
+
+IMP
+What is VPC..?
+What is Public Subnet..?
+What is Prive Subnet..?
+What is Natgateway..?
+What is Route Table..? 
+What is IGW (Internet gateway)..?
+
+CIDR Range (Sider Range)
+Way to allocate IP address 
+
+10.0.0.0/16
+Base IP: 10.0.0.0
+Subnet Mask: 16(n)
+
+Formula 2^(32 - n) = 2 to the power of (32 - n)
+32-16 =16 ==> 2^16 ==>65536 
+
+
+10.0.0.0/24 == 2^(32-24)=24^8=256
+10.0.0.0 == Network Address
+10.0.0.1 == VPC Router
+10.0.0.2 == DNS usage
+10.0.0.3 == Future use
+10.0.0.255 == BroadCast address
+
+Bastion Host - Jump Host
+Connect private ec2 using public ec2
+
+========================================
+VPC Peering
+
+Default VPC EC2 <====> Custom  VPC EC2
+
+Non-Transit
+Transit Gateway --> Peering All VPC using hub
+
+================================================
+
+COMMANDS
+ls -ltr
+wget <link of file>
+rm -rf
+cd
+unzip filename.zip
+cp -pr * /var/www/html
+pwd
+
+=============================================
+Auto Scalling
+scale in ---> Reduse the numer of instance
+scale out  -->increse the numer of instance
+
+IMP:
+Desired Capacity
+Minimum Capacity
+Maximum Capacity
+
+==================================================
+Network ACLs(NACL): A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets.
+
+Security Groups
+Firewall to control traffic to your EC2 instance
+ALLOW Rules
+Stateful, inbound traffic is defined, and return traffic (outbound) is automatically allowed
+
+NACL, Network Access Control List
+Firewall to control traffic to your subnet
+ALLOW and DENY rules
+Stateless, you have have to spacify both inbound and outbound rules
+
+Allow and Deny
+100 == 10.3.4.5 === Priority... lower the number higher the priority 200 10.3.4.5
+300
+
+==========DECOUPLE ARCTITECH ========
+No depend on on other
+

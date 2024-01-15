@@ -1,0 +1,72 @@
+AWS Identity and Access Management (IAM): 
+- is a web service that helps you securely control access to AWS resources. 
+- You use IAM to control who is authenticated (signed in) and authorized (has permissions) to use resources.
+
+The term Identity and Access Management is:
+Identity — stands for Authentication
+Access — stands for Authorization
+
+Components of IAM:
+1. Users
+2. Groups
+3. Roles
+4. Policies
+
+=========Dev,QA and Staging AWS account==============
+
+Testing Team:Read access to all aws resources(Clousdwatch log group access,Metrics dashboard)
+
+Development Team:Read access to all aws resources(liminted service write access)
+
+DevOps Team: Admin access
+
+==========Production AWS account==============
+
+Production AWS Account: only DevOps will have access(no others)
+
+====================================================
+
+
+Users:
+- Using IAM, we can create and manage AWS users and use permissions to allow and deny their access to AWS resources.
+Groups: 
+- Groups are collections of users and have policies attached to them
+Roles:
+— An IAM role is an IAM entity that defines a set of permissions for making AWS service requests.
+   Trusted entities such as IAM users, applications or AWS services like EC2, S3, Lambda etc.
+Policies:
+— We create policies to assign permission to a user, group, role or resource. It is a document that explicitly lists the permissions
+Main policy types:
+1.Service controlled policies (SCPs)
+2.Identity based policies
+3.Resource based policies
+
+
+Communication between two AWS services(IAM role needs to attach)
+
+EC2 to access s3 resource
+- Create role with s3 policy  and attach to EC2 instance.
+
+and each resource in AWS can also control by using CLI  (Each services in AWS has its own cli commands)
+
+S3 ClI commands:
+# To list the s3 buckets
+aws s3 ls
+
+
+#to copy file from ec2 server to s3 bucket
+aws s3 cp sourcefile s3://s3-bucket-name   
+
+
+#To download file from s3 bucket
+aws s3 cp s3://s3-bucket-name/filename .
+
+
+
+
+
+
+
+
+
+

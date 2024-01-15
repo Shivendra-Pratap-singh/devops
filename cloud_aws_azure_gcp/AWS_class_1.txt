@@ -1,0 +1,208 @@
+Cloud:
+======
+
+What is cloud ?
+---------------
+"cloud" refers to servers that are accessed over the Internet, and we can run our applications / software and databases on those servers.
+Cloud servers are located in data centers all over the world. 
+By using cloud computing, users and companies do not have to manage physical servers themselves or run software applications on their own machines.
+
+
+What is cloud computing?
+------------------------
+
+Cloud computing is the on-demand delivery of IT resources (compute, storage, applications....) through a cloud services platform (AWS) via the internet with pay-as-you-go pricing.
+
+
+
+Features of cloud computing:
+---------------------------
+
+• With cloud computing, we don’t need to make large up-front investments in hardware and spend a lot of time managing that hardware. Instead, we can provision exactly the right type and size of computing resources we need.
+
+• With cloudcomputing, we can access as many resources as we need, almost instantly, and only pay for what we use.
+
+•	Cloud computing provides an easy way to access servers, storage, databases, and a broad set of application services over the Internet.
+
+•	Cloud computing providers such as AWS own and maintain the network- connected hardware required for these application services, 
+
+Advantages of Cloud Computing:
+------------------------------
+•	Low cost
+•	Usability
+•	Bandwidth
+•	Accessibility
+•	Disaster Recovery
+•	Secure
+
+Cloud service providers / Platforms:
+------------------------
+amazon    -->    AWS    
+microsoft -->    azure   
+google    -->    gcp   
+
+
+
+
+
+
+What is AWS Cloud Computing?
+----------------------------
+- Setting up Cloud computing is the on-demand delivery of IT resources (compute, storage, applications....) through AWS cloud services platform  via the internet with pay-as-you-go pricing.
+
+- Accessing IT resources provided by cloud provider (AWS) through web.
+
+
+- Three key words
+ 1. On – Demand (Whenever/whatever we need, we get immediately)
+ 2. Scalable (Increase and Decrease the configuration as per requirement)
+ 3. Pay only whatever you use
+ 
+
+AWS HISTORY:
+------------
+•	AWS was launched in 2006.
+•	Amazon converts the unused storage infrastructure as business “Simple Storage web service” S3.
+•	By the end of 2006, Elastic Compute Cloud (EC2) was launched.
+•	Today AWS providing 70+ web services across 190 countries.
+•	Amazon Web Services (AWS) is a secure cloud services platform, offering compute power, database storage, content delivery and other functionality to help businesses scale and grow.
+
+
+AWS is located in 20 geographical locations called as "regions"
+
+What is a Region?
+-----------------
+• Region is a distinct geographic location where amazon has its infrastructure.
+• Each region will have a minimum of two availability zones.
+• All the regions are designed to be independent of each other with	separate power sources,	internet connectivity and geographic location.
+
+
+
+What is availability zone?
+--------------------------
+•	An availability zone is a separate datacenter within a region. Amazon has intentionally kept region independent of each other if one goes down it does not have effect on other.
+
+For e.g:  amazon have 2 AZ in Mumbai ap-south-1a, ap-south-1b.
+
+
+
+
+
+=======================================================================================================
+Note: 
+=======================================================================================================
+
+- Servers ==> CPU + RAM + HDD + OS
+
+- Physical servers will be located inside company premises( also called as on premises) 
+
+- Datacenter == on Premise servers ==> place where you will keep all your server ==> server room
+ 
+- How to access AWS cloud --> GUI / CLI
+ 
+ 
+ 
+
+Cloud:
+======
+
+Before cloud?
+-------------
+to start a small startup IT company 
+- employees 
+- rsoursec
+
+zomato like application 
+developers --> write code --> build --> deploy
+
+things required to for this applications are?
+
+1. servers?
+------------
+   High configuration server
+    - 64 GB RAM
+	-  1 TB HDD
+	- 8 core cpu
+
+ to buy 100 such servers we need to spend lot of money.
+ 
+2. OS ?
+--------
+   windows --> licensed OS --> pay in thousands 
+   linux --> free os --> use it for free 
+   linux also has paid / licensed version with support to any problems in OS
+ for licensed OS we need to spend money.
+
+
+3. S/W ?
+--------
+  What if any pre requisite s/w is paid ?
+
+we need to spend money.
+
+4. Networking components:
+-------------------------
+  to purchse n/w components to enable communication betwen servers.
+  networking components like switches, routers, modems & cables.
+  
+we need to spend money.
+
+5. Maintainance:
+----------------
+   24 X 7 X 365 
+   
+we need to spend money for maintainance activities such as AC / Generator / security .
+
+6. ADMINS:
+----------
+  Hire admin employees
+  - Sys admin
+  - N/W admin
+  - DB admin
+   
+we need to spend money.
+
+
+7. Time:
+--------
+  1 week time to assemble hardware components + install os + etc......
+
+
+
+Conclusion on Physical setup / on premise setup ===> we need to spend lots & lots of money.
+
+with cloud technology / cloud computing, we can overcome all the above 7 disadvantages, with very less ammount of money spent.
+
+
+
+ 
+------------------------------------------------------------------------------------------------
+
+
+Note:
+-----
+what is Web traffic / traffic ?
+--> Web traffic: incoming request + outgoing response from server
+
+ eg: search any product (incoming request to server) & output (response from server)
+
+what if traffic increases?
+- load on system increases --> cpu utilization also increses --> goes beyond 100% ? --> server will get crashed? --> server / application will go down 
+ 
+- we need to scale up resources to avoid such servers crashes.
+
+approaching the above issue with cloud?
+ 
+with Autoscaling feature: we can write a condition like 
+ - if my CPU utilization goes more than 80% add 1 more server automatically.
+ - if my CPU utilization goes lesser than 30% remove 1 more server automatically.
+ 
+
+---------------------------------------------------------------------------------------------------------------
+
+
+What are the layers available in cloud computing? 
+------------------------------------------------
+•	SaaS: Software as a Service 
+•	PaaS: Platform as a Service
+•	IaaS: Infrastructure as a Service
