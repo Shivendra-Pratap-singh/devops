@@ -1,0 +1,288 @@
+Terraform
+
+Terraform Principle is
+
+DRY (don't repeat yourself)
+
+IaaC or IaC
+Infrastructure as a Code or Infrastructure as Code
+
+Define, Provision, Configure, Update and destroy infra resources
+
+Automate provision of servers on the cloud
+Want to install s/w
+Deploy the applications
+
+Terraform for 
+
+Automate provision of servers on the cloud
+Manage mordern IT Infra structure
+
+Provision for Virtual Servers, Load Balancer, DB etc ...
+You are learning difference between mutuable and Immutable Infra
+
+_______________________________________________________________________________________________________________________
+Mutable and Immutable
+
+Mutable infrastructure can be updated, configured as per the requirement. It is possible to login to servers, apply patches, update configuration, scale up/down it etc. 
+In a traditional mutable server infrastructure, servers are continually updated and modified in place
+
+Immutable infrastructure is something which can never be modified once it is deployed.
+An immutable infrastructure is another infrastructure paradigm in which servers are never modified after they're deployed
+_______________________________________________________________________________________________________________________
+Important aspects of Convergence or Idempotent
+
+You can run the code multiple times and everytime you run, it will only make changes that are necessary to bring the environment into a defined state.
+It would leave anything already in places as it is, without us having to write any additional code
+________________________________________________________________________________________________________________________
+
+Resource
+Every object that Terraform manage is called a resource
+Resource can be compute instance, a DB server, etc ... 
+
+________________________________________________________________________________________________________________________
+Lab
+
+Download Terraform
+Install Terraform
+Configure Terraform
+Download Visual Studio Code
+Install Visual Studio Code
+Once you get into Visual Studio Code Application
+	- Install Terraform Plugin at Visual Studio
+	- Install Terraform Autocomplete at Visual Studio
+
+Install AWS CLI
+Go to AWS IAM Services and obtain
+	- Access and Secret Key
+
+Go to Command Prompt, apply below command and supply your Access and Secret Key
+
+aws configure
+_________________________________________________________________________________________________________________________
+
+Go to Visual Studio Code Applications and Select terminal where you can get terminal window
+
+Apply below commands
+
+terraform version
+or
+terraform --version
+
+_______________________________________________________________________________________________________________________
+
+Do visit below web page for Single Truth of Terraform
+
+https://registry.terraform.io/
+_______________________________________________________________________________________________________________________
+
+HashiCorp Configuration Language (HCL) 
+
+HCL Syntax
+
+<block> <arguments> {
+	key1 = value1
+	kwy2 = value2
+}
+
+Block contain information about the infra platform and a set of resources within platform that we want to create.
+
+______________________________________________________________________________________________________________________
+
+Simple HashiCorp Configuration Language (HCL) 
+
+Create new folder and write below script
+
+resource "local_file" "sports" {
+	  	filename = "/root/diet.txt"
+	  	content = "Drink 2.5 liter water per day"
+        	}
+***********************************************************************************************************************
+<file name>.tf
+.tf indiciates Teffaform File
+
+
+Terraform initilazing 
+
+Initializing provider plugins and downloading provider plugins. It consumes more storage
+
+Apply terraform init
+
+After apply terraform init command, you can get Provider version details.
+
+_______________________________________________________________________________________________________________________
+
+Terraform Script with Provider minimam Version 
+
+terraform {
+    required_version = "~> 0.15.3"
+    required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+     }
+    }
+   }
+
+
+
+_______________________________________________________________________________________________________________________
+Create an AWS Instance
+
+Resource is an object which you want to manage at cloud.
+Need to consider two importants things in order to learn resource
+1	What is type of resources
+2	Custom name you are giving to terraform (Terraform name)
+
+
+terraform {
+    required_version = "~> 0.15.3"
+    required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+     }
+    }
+   }
+
+provider "aws" {
+	region = "us-east-1"
+	# version = "~> 3.37"
+}
+
+resource "aws_instance" "Raminfra" {
+	ami = "ami-0df6cfabfbe4385b7"
+	instance_type = "t2.micro"
+}
+
+
+Command
+
+terraform init
+
+terraform plan
+(Dummy execution w/o creating actual value and validate whether syntex is correct or not)
+Draft mode
+terraform apply
+(Actual executions and you get desired result)
+
+Do visit AWS EC2 Instance Dashboard where you get new instance created by Terraform
+_________________________________________________________________________________________________________________________
+Adding Tags at ECw Instance
+
+provider "aws" {
+	region = "us-east-1"
+	version = "~> 3.37"
+}
+
+resource "aws_instance" "Raminfra" {
+	ami = "ami-0df6cfabfbe4385b7"
+	instance_type = "t2.micro"
+	tags = {
+        	Name = "Terraform-Server"
+ 	}
+}
+
+Execute
+terraform plan
+terraform apply -auto-approve 
+(Auto Approve, eliminate your review)
+________________________________________________________________________________________________________________________
+Terminate an AWS Instance
+
+Command is
+
+terraform destroy
+
+Do visit AWS EC2 Instance Dashboard where instance got deleted by Terraform managed instance
+__________________________________________________________________________________________________________________________
+Create Multiple AWS Instance
+
+provider "aws" {
+	region = "us-east-1"
+	version = "~> 3.37"
+	}
+
+resource "aws_instance" "DigiCloudInfra" {
+	ami = "ami-0df6cfabfbe4385b7"
+	count = 3
+	instance_type = "t2.micro"
+	tags = {
+	       Name = "DigiCloudInfra-${count.index}"
+	}
+}
+
+terraform init
+terraform plan
+terraform apply
+
+Experience with mutiple instances
+Output is
+DigiCloudInfra-0
+DigiCloudInfra-1
+DigiCloudInfra-2
+_________________________________________________________________________________________________________________________
+
+Delete particular AWS Instance 
+
+resource_type - Type of the resource being addressed
+
+How to obtain resource_type? Apply below commands
+
+terraform show resource_type
+or
+terraform state list
+
+Where you can get 
+
+terraform destroy -target RESOURCE_TYPE.NAME
+
+Delete group of AWS Instance
+
+terraform destroy -target RESOURCE_TYPE.NAME -target RESOURCE_TYPE2.NAME
+
+_________________________________________________________________________________________________________________________
+
+Create AWS S3 Buckets 
+
+S3: Simple Storage Services (Used for store files, store for backup, etc ...)
+Provide high durability (99.999999999%). Very remote change to lost data
+S3 standard is desinged for 99.99% availability
+
+provider "aws" {
+	region = "us-east-1"
+	version = "~> 3.37"
+	}
+
+resource "aws_s3_bucket" "big-basket" {
+	bucket = "my-big-basket"
+}
+
+Apply,
+terraform init
+terraform plan
+terraform apply
+
+Do visit AWS S3 Bucket, where you get bucket which generated by Terraform
+__________________________________________________________________________________________________________________________
+
+Terraform State - Desired, Known and Actual
+
+Desired: 
+You define the desired state of the resources you want to create
+
+I want S3 bucket
+I want 10 Virtual Servers
+
+Known:
+Known state is result of last execution. 
+What is present in the terraform.tfstate file, which is backup file
+
+Actual:
+What is actually present in AWS. 
+_________________________________________________________________________________________________________________________
+
+Remote state with locking
+
+Terraform Plan : acquiring state lock, executing the command, and releasing the state lock
+
